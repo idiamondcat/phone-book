@@ -1,0 +1,67 @@
+<mat-dialog-content>
+    <span class="employee-fullname"></span>
+    <div *ngIf="!this.isEmployeeSelected">
+        <div class="head-list-wrapper">
+           <input class="edit-field" id="staffSearch" type="text" placeholder="Найти..." (keyup)="searchStaff($event.target.value)">
+           <button class="close-btn" title="Закрыть" mat-dialog-close>
+               <span class="material-icons main-icons">close</span>
+           </button> 
+        </div>
+       <table *ngIf="employeeList.length !== 0">
+           <tr *ngFor="let employee of employeeList">
+                <td class="staff-fullname">{{employee.surname + ' ' + employee.name + ' ' + employee.patronimyc}}</td>
+                <td class="add-col">
+                    <button class="add-data-btn" (click)="addPhoneData(employee.id)" title="Добавить">
+                        <span class="material-icons dark-blue-icon">add</span>
+                    </button>
+            </td>
+            </tr>
+        </table>
+        <div class="no-employees" style="display: none;">
+            <span>Новых сотрудников нет.</span>
+        </div> 
+    </div>
+    <div *ngIf="this.isEmployeeSelected" class="contact-data-wrapper">
+        <div class="add-phone-main-wrapper">
+            <div class="add-phone-head-wrapper">
+                <div>
+                    <button class="back-btn" (click)="backToList()">
+                        <span class="material-icons">keyboard_backspace</span>
+                        Назад
+                    </button>
+                </div>
+            </div>
+            <fieldset [formGroup]="employeeData">
+                <p>
+                    <label class="new-field-label" for="internalNum">Внутренний номер</label>
+                    <input class="new-field" type="text" formControlName="internalNum" placeholder="xx-xx">
+                </p>
+                <p>
+                    <label class="new-field-label" for="externalNum">Внешний номер</label>
+                    <input class="new-field" type="text" formControlName="externalNum" placeholder="xxx-xx-xx">
+                </p>
+                <p>
+                    <label class="new-field-label" for="mobileNum">Мобильный номер</label>
+                    <input class="new-field" [ngClass]="{'error': employeeData.get('mobileNum').invalid}" type="text" formControlName="mobileNum">
+                </p>
+                <p>
+                    <label class="new-field-label" for="emailAddress">Электронная почта</label>
+                    <input class="new-field" [ngClass]="{'error': employeeData.get('emailAddress').invalid}" type="text" formControlName="emailAddress" placeholder="example@email.ru">
+                </p>
+                <p>
+                    <label class="new-field-label" for="roomNum">Номер комнаты</label>
+                    <input class="new-field" type="text" formControlName="roomNum" placeholder="xxxx">
+                </p>
+                <p>
+                    <label class="new-field-label" for="descriptionData">Примечание</label>
+                    <textarea class="new-field comment-field" cols="1" rows="1" formControlName="descriptionData"></textarea>
+                </p>
+            </fieldset>
+            <div class="btns-wrapper">
+                <button class="send-data-btn" (click)="sendData()">Сохранить</button>
+                <button class="cancel-btn" mat-button mat-dialog-close>Отмена</button> 
+            </div>
+        </div>
+    </div>
+    <mat-progress-bar *ngIf="isLoad" mode="indeterminate"></mat-progress-bar>
+</mat-dialog-content>

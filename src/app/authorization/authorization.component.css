@@ -1,0 +1,90 @@
+.log-in-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+}
+h1 {
+    margin: 0;
+    margin-bottom: 23px;
+    color: #7B838F;
+    font-size: 21px;
+    font-weight: 500;
+    text-align: center;
+}
+.log-in-fields-wrapper {
+    border: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+label {
+    color: #7B838F;
+    text-align: left;
+    margin-bottom: 7px;
+}
+.log-in-fields {
+    width: 15vw;
+    border: 2px solid #C9D4D4;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 13px 18px;
+}
+.log-in-fields:hover {
+    border-color: #46c3c3;
+    transition: border-color 0.7s;
+}
+.log-in-fields:focus,
+.log-in-fields:active {
+    box-shadow: none;
+    outline: none;
+    border-color: #46c3c3;
+}
+#login {
+    margin-bottom: 15px;
+}
+#password {
+    margin-bottom: 20px;
+}
+.error {
+    border-color: #F54E40;
+}
+p {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+}
+.log-in-btn {
+    cursor: pointer;
+    width: 67%;
+    background-color: #006e88;
+    color: #ffffff;
+    padding: 13px 18px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 14px;
+}
+.log-in-btn:hover {
+    opacity: 0.7;
+}
+.log-in-btn:focus,
+.log-in-btn:active {
+    box-shadow: none;
+    outline: none;
+}
+.log-in-close-btn {
+    cursor: pointer;
+    width: 27%;
+    padding: 13px 18px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background-color: #C9D4D4;
+}
+.log-in-close-btn:hover {
+    opacity: 0.7;
+}
+.log-in-close-btn:focus,
+.log-in-close-btn:active {
+    box-shadow: none;
+    outline: none;
+}

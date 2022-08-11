@@ -1,0 +1,56 @@
+<!-- <div [id]="model.employee.id" class="dropdown-string">{{model.employee.id}} -->
+
+    <div class="model-container" *ngIf="model">
+    <div class="fullname-col-size model-col edit-person-data">
+       <div class="edit-person-photo-wrapper">
+          <div class="add-photo-btn-wrapper">
+              <label class="file-label" [for]="'editPhoto'+model.employee.id">
+                  <input [id]="'editPhoto'+model.employee.id" type="file" (change)="onSelectPhoto($event.target.files, model.employee.id)">
+                  <span class="add-photo">
+                      <span class="add-photo-text">Загрузить</span>
+                   </span>
+               </label>
+           </div>
+           <span id="popupPreview"></span>
+           <span id="fileName"></span> 
+ </div>  
+ </div>
+ <div class="factdepartment-col-size model-col">
+ </div>
+ <div class="person-phones-size model-col">
+   <p class="data-field-wrapper">
+          <label class="edit-field-label" for="editPhoneInternal">Внутренний номер</label>
+          <input class="edit-field" id="editPhoneInternal" type="text" [value]="model.phone_internal" pattern="^[0-9]{2}-[0-9]{2}$" placeholder="xx-xx"> 
+       </p>
+       <p class="data-field-wrapper">
+         <label class="edit-field-label" for="editPhoneExternal">Внешний номер</label>
+         <input class="edit-field" id="editPhoneExternal" type="text" [value]="model.phone_external" pattern="^[0-9]{3}-[0-9]{2}-[0-9]{2}$" placeholder="xxx-xx-xx">  
+       </p>
+       <p class="data-field-wrapper">
+         <label class="edit-field-label" for="editMobilePhone">Мобильный номер</label>
+         <input class="edit-field" id="editMobilePhone" type="text" [value]="model.phone_mobile" pattern="^[789][0-9]{10}$">  
+       </p>
+ </div>
+ <div class="email-size model-col edit-person-data">
+   <p class="data-field-wrapper">
+        <label class="edit-field-label" for="editEmail">Электронная почта</label>
+        <input class="edit-field" id="editEmail" type="text" [value]="model.email" pattern="email" placeholder="example@email.ru"> 
+        </p>
+ </div>
+ <div class="room-size model-col edit-person-data">
+   <p class="data-field-wrapper">
+    <label class="edit-field-label" for="editRoom">Номер комнаты</label>
+    <input class="edit-field" id="editRoom" type="text" [value]="model.room" pattern="^[0-9]{4}$" placeholder="xxxx">
+    <span class="clarification">значение "скрыть" прячет сотрудника из списка</span>
+  </p>
+ </div>
+ <div class="comment-size model-col edit-person-data">
+  <p class="data-field-wrapper">
+   <label class="edit-field-label" for="description">Примечание</label>
+   <textarea class="edit-field comment-field" id="description" cols="1" rows="1" [value]="model.description"></textarea>
+ </p>
+</div>
+     <div class="edit-person-data model-col">
+        <button class="save-data-btn" (click)="saveData(model.uid, model.employee.id)">Сохранить</button> 
+     </div>
+</div>

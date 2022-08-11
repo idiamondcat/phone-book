@@ -1,0 +1,100 @@
+<div class="container">
+    <div class="header-wrapper">
+        <div class="header-left-side">
+            <img class="header-logo" src="assets/img/logonewrubinfinal.svg" alt="Rubin Logo">
+        <div class="contacts-wrapper">
+            <p class="contacts">Многоканальный телефон: <span>676-89-89</span></p>
+            <p class="contacts">Факс: <span>596-35-81</span></p>
+            <p class="contacts">Электронная почта: <span>inforubin@rubin-spb.ru</span></p>
+        </div> 
+        </div>
+        <div *ngIf="sessionData.isAuth == false" class="admin-account-unauthorized">
+           <button class="log-in-btn" (click)="openAuthorizationPopup()">Админка</button> 
+        </div>
+        <div *ngIf="sessionData.isAuth == true" class="admin-account-authorized">
+            <button class="admin-btn">
+                <span class="material-icons dark-blue-icon">account_circle</span>
+            </button>
+            <span class="admin-text">Администратор</span>
+            <button class="log-out-btn" title="Выйти" (click)="logOut()">
+                <span class="material-icons main-icons">logout</span>
+            </button> 
+         </div>
+    </div>
+    <div class="head-wrapper">
+        <div class="filters-wrapper">
+           <select class="person-filters" id="departmentFilter" (change)="changeDepartment($event.target.value)">
+            <option value="none" selected>Выбрать отдел...</option>
+            <ng-container *ngFor="let department of departments">
+                <option [value]="department">{{department}}</option>
+            </ng-container>
+        </select>
+           <input type="text" class="person-fields person-search" placeholder="Поиск по ФИО..." (keyup)="findWaiter($event.target.value)">
+        </div>
+        <div *ngIf="sessionData.isAuth == true">
+            <button class="add-staff-btn" (click)="addStaff()">Добавить сотрудника
+                <span class="material-icons">add</span>
+            </button>
+        </div>
+    </div>
+    <table>
+        <tr class="table-head">
+            <th class="fullname-col-size">ФИО
+                <button class="sort-btn" (click)="sortingWaiter($event.target)">
+                    <span *ngIf="!isSorting" class="material-icons main-icons">expand_more</span>
+                    <span *ngIf="isSorting" class="material-icons main-icons">expand_less</span>
+                </button>
+            </th>
+            <th class="factdepartment-col-size">Должность</th>
+            <th class="person-phones person-phones-size">Телефон</th>
+            <th class="email-size">Электронная почта</th>
+            <th class="room-size">Номер комнаты</th>
+            <th class="comment-size">Примечание</th>
+            <th class="edit-size" *ngIf="sessionData.isAuth == true"></th>
+        </tr>
+            <ng-container *ngFor="let person of personData">
+              <tr *ngIf="sessionData.isAuth  || (person.room != 'скрыть') " class="table-main">
+                <td class="fullname-col fullname-col-size">
+                      <div class="person-info-wrapper">
+                          <img *ngIf="person.photo else emptyPhoto" class="photo" [src]="person.photo" alt="person.employee.surname">
+                          <ng-template #emptyPhoto>
+                            <span [id]="'empty'+person.employee.id" class="material-icons empty-photo">account_circle</span>
+                          </ng-template>
+                          <!-- <ng-template #fullPhoto>
+                              full photo here
+                          </ng-template> -->
+                         <span [id]="'preview'+person.employee.id"></span>
+                         <span class="fullname">{{person.employee.surname + ' ' + person.employee.name + ' ' + person.employee.patronimyc}}</span> 
+                      </div>
+                </td>
+                <td class="factdepartment-col factdepartment-col-size"><span class="factdepartment-text" (click)="changeDepartment($event.target.innerText)">{{getMainDepart(person.employee.employee_numbers)}}</span><br>
+                {{person.employee.employee_numbers[0].position.position}}</td>
+                <td class="person-phones person-phones-size">
+                    <div class="person-phones-wrapper">
+                        <span *ngIf="person.phone_internal" class="person-phone phone-internal">{{person.phone_internal}}</span>
+                        <span *ngIf="person.phone_external" class="person-phone phone-external">{{person.phone_external}}</span>
+                        <span *ngIf="person.phone_mobile" class="person-phone phone-mobile">{{person.phone_mobile}}</span>  
+                    </div>
+                </td>
+                <td class="email-size"><a class="email-link" [href]="'mailto:'+person.email">{{person.email}}</a></td>
+                <td class="room-size">{{person.room}}</td>
+                <td class="comment-size">{{person.description}}</td>
+                <td class="edit-size" *ngIf="sessionData.isAuth == true">
+                    <div class="person-edit-data-wrapper">
+                       <button class="edit-btn" (click)="editPersonData(person.employee.id)" title="Редактировать"></button> 
+                    </div>
+                </td>
+              </tr>
+              <tr [id]="person.employee.id" class="dropdown-string" style="display: none; width: 100%;">
+                <td colspan="7">
+                    <app-dropdown-string class="new-elem" [model]="childData" (saveNewData)="getData()"></app-dropdown-string>
+                </td>                   
+              </tr>
+            </ng-container>
+    </table>
+    <button class="up-btn" title="Наверх" (click)="scroll.scrollToPosition([0,0])" style="display: none;">
+        <span class="material-icons up-btn-icon">expand_less</span>
+    </button>
+    <mat-spinner *ngIf="isLoad" class="preloader"></mat-spinner>
+</div>
+

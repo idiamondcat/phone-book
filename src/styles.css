@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; font-size: 14px; color: #7B838F; }
+
+.mat-dialog-container {
+    overflow-y: hidden !important;
+}
+.mat-dialog-content {
+    position: relative !important;
+}
+.dark-blue-icon {
+    color: #006e88;
+}
+.main-icons {
+    font-size: 26px;
+    color: #7B838F;
+}
+.overlay {
+    overflow-x:hidden;
+    overflow-y:hidden;
+     -webkit-transition:all 3s ease-in-out;
+     transition:all 3s ease-in-out;
+  }
+.overlay::before {
+    content: '';
+    width: 100vw;
+    min-height: 100vh;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, .5);
+    -webkit-transition: 3s;
+    transition: 3s;
+  }
+.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #46c3c3;
+}
+.mat-progress-bar .mat-progress-bar-buffer {
+    background-color: #f8fcff;
+}
+.mat-progress-bar .mat-progress-bar-fill::after {
+    background-color: #46c3c3;
+}

@@ -1,0 +1,16 @@
+<mat-dialog-content>
+    <div class="log-in-form-wrapper">
+    <h1>Авторизация</h1>
+    <fieldset class="log-in-fields-wrapper" (keydown.enter)="enterSubmit($event)" [formGroup]="adminData">
+      <label for="login">Логин*</label>
+      <input class="log-in-fields" [ngClass]="{'error': adminData.get('loginData').invalid}" id="login" type="text" formControlName="loginData">
+      <label for="password">Пароль*</label>
+      <input class="log-in-fields" [ngClass]="{'error': adminData.get('passwordData').invalid}" id="password" type="password" formControlName="passwordData">
+    </fieldset>
+        <p>
+          <button class="log-in-btn" (click)="authentification()">Войти</button>
+          <button class="log-in-close-btn" mat-button mat-dialog-close (click)="cleanForm()">Отмена</button>   
+        </p>
+    </div>
+</mat-dialog-content>
+    
